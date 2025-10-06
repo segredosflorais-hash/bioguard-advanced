@@ -3,80 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BioGuard Sentinel - Minutos Salvam Vidas</title>
+  <title>BioGuard Sentinel</title>
   <link rel="stylesheet" href="assets/css/style.css" />
-  <script defer src="assets/js/main.js"></script>
 </head>
 <body>
-  <header class="hero">
+  <header class="header">
     <img src="assets/images/bioguard-logo.svg" alt="BioGuard Sentinel Logo" class="logo" />
     <h1>BioGuard Sentinel</h1>
-    <p class="tagline">Minutos Salvam Vidas</p>
-    <div class="buttons">
-      <button class="btn" id="btn-rapidez">Rapidez</button>
-      <button class="btn" id="btn-foco">Foco<br><small>Auxílio no controle da Sepse</small></button>
-      <button class="btn" id="btn-confiabilidade">Confiabilidade</button>
-    </div>
+    <p class="slogan">Minutos Salvam Vidas</p>
+    <button id="theme-toggle" aria-label="Alternar tema" class="theme-toggle">🌙</button>
   </header>
 
-  <main class="container">
-    <section id="info-section" class="info-section hidden">
-      <h2 id="info-title"></h2>
-      <p id="info-content"></p>
+  <main>
+    <section class="buttons">
+      <button class="info-btn" data-info="Rapidez: diagnósticos e alertas otimizados.">Rapidez</button>
+      <button class="info-btn" data-info="Foco: auxílio no controle da sepse.">Foco</button>
+      <button class="info-btn" data-info="Confiabilidade: decisões baseadas em evidências.">Confiabilidade</button>
     </section>
 
     <section class="form-section">
       <h2>Acesso Médico</h2>
-      <form id="userForm">
-        <div class="form-group">
-          <label for="name">Nome do Médico</label>
-          <input type="text" id="name" name="name" placeholder="Dr(a). Nome completo" required />
+      <form class="login-form">
+        <input type="text" placeholder="Nome completo" required />
+        <input type="text" placeholder="CRM" required />
+        <input type="email" placeholder="E-mail" required />
+        <div class="password-field">
+          <input type="password" placeholder="Senha" id="password" required />
+          <span id="togglePassword" class="eye">👁️</span>
         </div>
-
-        <div class="form-group">
-          <label for="crm">CRM</label>
-          <input type="text" id="crm" name="crm" placeholder="Ex: 12345-SP" required />
-        </div>
-
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="email@exemplo.com" required />
-        </div>
-
-        <div class="form-group password-field">
-          <label for="password">Senha</label>
-          <input type="password" id="password" name="password" placeholder="••••••••" required />
-          <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
-        </div>
-
-        <div class="form-group password-field">
-          <label for="confirmPassword">Confirmar Senha</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required />
-          <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
-        </div>
-
-        <div class="form-group">
-          <label for="specialty">Especialidade</label>
-          <select id="specialty" name="specialty">
-            <option value="">Selecione...</option>
-            <option value="infectologia">Infectologia</option>
-            <option value="clinica">Clínica Médica</option>
-            <option value="uti">Terapia Intensiva</option>
-            <option value="emergencia">Emergência</option>
-            <option value="outra">Outra</option>
-          </select>
-        </div>
-
-        <div class="buttons-form">
-          <button type="submit" class="btn primary">Entrar</button>
-          <button type="button" id="btnCadastro" class="btn secondary">Cadastrar</button>
-        </div>
+        <button type="submit">Entrar</button>
+        <a href="#" class="forgot">Esqueci minha senha</a>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>🔒 Dispositivo Médico Classe I – Registro ANVISA em processo</p>
+    <p>© 2025 BioGuard Sentinel — Open Source Clinical Intelligence</p>
   </footer>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
