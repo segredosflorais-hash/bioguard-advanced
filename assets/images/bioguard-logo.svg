@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BioGuard Sentinel Logo">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#00ffc2"/>
+      <stop offset="1" stop-color="#009e7a"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Contorno do escudo com topo em ângulo vivo -->
+  <path d="M100 10 L160 40 L170 80 L170 125 Q140 165 100 185 Q60 165 30 125 L30 80 L40 40 Z"
+        fill="url(#g1)" stroke="#006b4e" stroke-width="2" filter="url(#glow)"/>
+
+  <!-- Inner shield slightly darker -->
+  <path d="M100 20 L152 46 L160 80 L160 120 Q132 152 100 170 Q68 152 40 120 L40 80 L48 46 Z"
+        fill="#013b2a" opacity="0.06"/>
+
+  <!-- Hélice central estilizada (branco translúcido) -->
+  <g transform="translate(100,100)" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M-22 -45 C -5 -30, 5 -30, 22 -45" opacity="0.95"/>
+    <path d="M-22 -15 C -5 0, 5 0, 22 -15" opacity="0.95"/>
+    <path d="M-22 15 C -5 30, 5 30, 22 15" opacity="0.95"/>
+    <line x1="-22" y1="-45" x2="-22" y2="15" stroke-opacity="0.15" />
+    <line x1="22" y1="-45" x2="22" y2="15" stroke-opacity="0.15" />
+  </g>
+
+  <!-- Cross/mark (subtil, em relevo) -->
+  <g transform="translate(100,100)">
+    <path d="M-10 0 H10 V-10 H20 V0 H10 V10 H-10 V0 Z" fill="#00ffc2" opacity="0.12"/>
+  </g>
+</svg>

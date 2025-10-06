@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BioGuard Sentinel — Minutos Salvam Vidas</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="assets/images/bioguard-logo.svg" alt="BioGuard Sentinel logo" class="logo" />
+        <div class="brand-text">
+          <h1>BioGuard Sentinel</h1>
+          <p class="tagline">Minutos Salvam Vidas</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="btn ghost" id="btn-login-nav" data-open="login">Login</button>
+        <button class="btn outline" id="btn-signup-nav" data-open="signup">Cadastro</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="container hero-inner">
+      <div class="hero-left">
+        <h2 class="hero-title">Apoio clínico em sepse baseado em evidência</h2>
+        <p class="hero-lead">Resultado em menos de 60 segundos. Foco exclusivo em sepse. Transparência regulatória.</p>
+
+        <div class="feature-buttons">
+          <button class="card-btn" data-target="rapidez">Rapidez</button>
+          <button class="card-btn" data-target="foco">Auxílio no controle da sepse</button>
+          <button class="card-btn" data-target="confiabilidade">Confiabilidade</button>
+        </div>
+
+        <p class="note">Use os botões acima para abrir explicações rápidas. Textos são placeholders editáveis.</p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#app">Acessar Versão Beta</a>
+          <a class="btn secondary" href="#docs">Documentação</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card preview">
+          <h3>Preview Rápido</h3>
+          <p class="small">Insira dados mínimos e receba opções terapêuticas ranqueadas com referências.</p>
+          <ul class="list-compact">
+            <li><strong>Idade:</strong> 65</li>
+            <li><strong>Foco:</strong> Pulmonar</li>
+            <li><strong>Clearance:</strong> 56 mL/min</li>
+          </ul>
+          <div class="preview-actions">
+            <button class="btn small" id="demo-search">Simular Busca</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAIS / EXPANDABLES -->
+  <div id="explain-panel" class="explain-panel hidden" aria-hidden="true">
+    <button class="close-x" aria-label="Fechar">×</button>
+    <h3 id="explain-title">Título</h3>
+    <div id="explain-body">
+      <p>Texto explicativo (placeholder editável). Substitua por copy clínica validada.</p>
+    </div>
+  </div>
+
+  <!-- LOGIN / CADASTRO MODAL (placeholders, não enviam dados) -->
+  <div id="auth-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-x" aria-label="Fechar">×</button>
+
+      <div id="auth-forms">
+        <!-- LOGIN -->
+        <form id="form-login" class="auth-form">
+          <h3>Entrar</h3>
+          <label>Email institucional</label>
+          <input type="email" id="login-email" placeholder="seu.nome@hospital.org" required />
+
+          <label>Senha</label>
+          <div class="password-wrapper">
+            <input type="password" id="login-password" placeholder="••••••••" required />
+            <button type="button" class="eye" data-toggle="login-password" aria-label="Mostrar senha">👁️</button>
+          </div>
+
+          <div class="form-row">
+            <button class="btn primary" type="submit">Entrar</button>
+            <button type="button" class="btn ghost" data-switch="signup">Criar conta</button>
+          </div>
+          <p class="small muted">Ao entrar, confirme CRM e aceite termo de uso.</p>
+        </form>
+
+        <!-- SIGNUP -->
+        <form id="form-signup" class="auth-form hidden">
+          <h3>Cadastro Médico</h3>
+
+          <label>Nome Completo</label>
+          <input type="text" id="signup-name" placeholder="Nome Sobrenome" required />
+
+          <label>CRM (ex: 123456/SP)</label>
+          <input type="text" id="signup-crm" placeholder="000000/SP" required />
+
+          <label>Email institucional</label>
+          <input type="email" id="signup-email" placeholder="seu.nome@hospital.org" required />
+
+          <label>Senha</label>
+          <div class="password-wrapper">
+            <input type="password" id="signup-password" placeholder="••••••••" required />
+            <button type="button" class="eye" data-toggle="signup-password" aria-label="Mostrar senha">👁️</button>
+          </div>
+
+          <label class="checkbox">
+            <input type="checkbox" id="consent" required /> Aceito o Termo de Uso e envio de dados para fins de auditoria.
+          </label>
+
+          <div class="form-row">
+            <button class="btn primary" type="submit">Cadastrar</button>
+            <button type="button" class="btn ghost" data-switch="login">Já tenho conta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> BioGuard Sentinel · Dispositivo Médico Classe I (registro em processo)</p>
+      <p class="muted small">Não é prescrição. Decisão clínica é do profissional. Consulte fontes primárias.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
