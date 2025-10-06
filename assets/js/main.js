@@ -1,88 +1,42 @@
-// Main interactivity for Landing + Auth modals
-document.addEventListener('DOMContentLoaded', () => {
-  // year
-  document.getElementById('year').textContent = new Date().getFullYear();
+// Alternar visibilidade da senha
+function togglePassword(fieldId) {
+  const input = document.getElementById(fieldId);
+  input.type = input.type === "password" ? "text" : "password";
+}
 
-  // explain panel
-  const explainPanel = document.getElementById('explain-panel');
-  const explainTitle = document.getElementById('explain-title');
-  const explainBody = document.getElementById('explain-body');
-
-  document.querySelectorAll('.card-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const t = btn.getAttribute('data-target');
-      explainTitle.textContent = btn.textContent;
-      // placeholders editáveis
-      if (t === 'rapidez') {
-        explainBody.innerHTML = "<p><strong>Rapidez</strong>: Resultado em menos de 60 segundos (fluxo otimizado). Texto placeholder — edite conforme preferir.</p>";
-      } else if (t === 'foco') {
-        explainBody.innerHTML = "<p><strong>Auxílio no controle da sepse</strong>: Interface otimizada para decisões rápidas e contextualizadas. Placeholder editável.</p>";
-      } else {
-        explainBody.innerHTML = "<p><strong>Confiabilidade</strong>: Sanitize triplo, revisão humana 10% e audit log completo. Placeholder editável.</p>";
-      }
-      explainPanel.classList.remove('hidden');
-      explainPanel.setAttribute('aria-hidden', 'false');
-    });
-  });
-
-  // close explain
-  document.querySelectorAll('.explain-panel .close-x').forEach(b => b.addEventListener('click', () => {
-    explainPanel.classList.add('hidden');
-    explainPanel.setAttribute('aria-hidden', 'true');
-  }));
-
-  // modal logic (login/signup)
-  const authModal = document.getElementById('auth-modal');
-  const formLogin = document.getElementById('form-login');
-  const formSignup = document.getElementById('form-signup');
-
-  function openAuth(mode = 'login') {
-    authModal.classList.remove('hidden');
-    authModal.setAttribute('aria-hidden', 'false');
-    if (mode === 'login') {
-      formLogin.classList.remove('hidden');
-      formSignup.classList.add('hidden');
-    } else {
-      formLogin.classList.add('hidden');
-      formSignup.classList.remove('hidden');
-    }
+// Botões informativos (placeholders)
+const infoData = {
+  rapidez: {
+    title: "Rapidez",
+    content: "O BioGuard Sentinel processa dados clínicos em menos de 60 segundos, otimizando a tomada de decisão em urgência."
+  },
+  foco: {
+    title: "Foco",
+    content: "Auxílio preciso no controle da sepse, com base nas diretrizes ILAS e Surviving Sepsis Campaign."
+  },
+  confiabilidade: {
+    title: "Confiabilidade",
+    content: "Base científica sólida, auditoria humana e transparência total em cada resposta."
   }
+};
 
-  function closeAuth() {
-    authModal.classList.add('hidden');
-    authModal.setAttribute('aria-hidden', 'true');
-  }
+function showInfo(type) {
+  const section = document.getElementById("info-section");
+  section.classList.remove("hidden");
+  document.getElementById("info-title").textContent = infoData[type].title;
+  document.getElementById("info-content").textContent = infoData[type].content;
+}
 
-  document.querySelectorAll('[data-open="login"]').forEach(el => el.addEventListener('click', () => openAuth('login')));
-  document.querySelectorAll('[data-open="signup"]').forEach(el => el.addEventListener('click', () => openAuth('signup')));
-  document.querySelectorAll('.modal .close-x').forEach(el => el.addEventListener('click', closeAuth));
-  document.querySelectorAll('[data-switch]').forEach(b => b.addEventListener('click', ev => {
-    openAuth(ev.target.getAttribute('data-switch'));
-  }));
+document.getElementById("btn-rapidez").addEventListener("click", () => showInfo("rapidez"));
+document.getElementById("btn-foco").addEventListener("click", () => showInfo("foco"));
+document.getElementById("btn-confiabilidade").addEventListener("click", () => showInfo("confiabilidade"));
 
-  // eye toggle for password fields (delegation)
-  document.querySelectorAll('.eye').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-toggle');
-      const input = document.getElementById(targetId);
-      if (!input) return;
-      input.type = input.type === 'password' ? 'text' : 'password';
-      btn.textContent = input.type === 'password' ? '👁️' : '🙈';
-    });
-  });
+// Placeholder de login/cadastro
+document.getElementById("userForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  alert("Login simulado: integração futura com backend Supabase.");
+});
 
-  // demo search (placeholder)
-  document.getElementById('demo-search')?.addEventListener('click', () => {
-    alert('Simulação: busca de literatura iniciada (placeholder). Em produção, chamará /api/sepsis/literature.');
-  });
-
-  // basic form submit prevention (placeholders)
-  formLogin.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Login (placeholder). Integre com Supabase Auth no backend.');
-  });
-  formSignup.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Cadastro (placeholder). Integre validação CRM e Supabase no backend.');
-  });
+document.getElementById("btnCadastro").addEventListener("click", () => {
+  alert("Cadastro simulado: integração futura com Supabase Auth.");
 });
