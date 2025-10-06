@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Médico | BioGuard Sentinel</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Header / Navegação -->
+  <header class="site-header">
+    <nav class="top-nav" aria-label="Navegação principal">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="login.html" class="nav-link active">Login</a>
+      <a href="register.html" class="nav-link">Cadastro</a>
+      <!-- Botão de alternância de tema (opcional, o main.js ativa se existir) -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">🌙</button>
+    </nav>
+
+    <div class="brand" role="img" aria-label="BioGuard Sentinel">
+      <img src="assets/images/bioguard-logo.svg" alt="BioGuard Sentinel" class="logo" />
+      <h1 class="brand-title">BioGuard Sentinel</h1>
+      <p class="brand-sub">Minutos Salvam Vidas</p>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <section class="login-card" role="region" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">Acesso Médico</h2>
+
+      <form class="login-form" autocomplete="off" novalidate>
+        <div class="row">
+          <label for="fullname" class="sr-only">Nome completo</label>
+          <input id="fullname" name="fullname" type="text" placeholder="Nome completo" required />
+        </div>
+
+        <div class="row">
+          <label for="email" class="sr-only">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="E-mail profissional" required />
+        </div>
+
+        <div class="row password-row">
+          <label for="password" class="sr-only">Senha</label>
+          <input id="password" name="password" type="password" placeholder="Senha" required />
+          <!-- botão compatível com assets/js/main.js (classe 'toggle-pass') -->
+          <button type="button" class="toggle-pass" aria-label="Mostrar senha">👁️</button>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Entrar</button>
+          <a class="link" href="recovery.html">Esqueci minha senha</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 BioGuard Sentinel — Open Source Clinical Intelligence</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
