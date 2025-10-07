@@ -195,3 +195,68 @@ footer {
   .slogan { font-size: 1.1rem; }
   .info-btn { width: 90%; }
 }
+
+/* ---------- Seção de Destaques (Rapidez / Foco / Confiabilidade) ---------- */
+.features {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 3rem auto;
+  max-width: 700px;
+  padding: 0 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 255, 194, 0.25);
+}
+
+.feature-title {
+  font-size: 1.4rem;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--accent);
+  min-width: 130px;
+}
+
+.feature-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+html.dark .feature-item {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 255, 194, 0.1);
+}
+
+html.dark .feature-title {
+  color: var(--accent);
+}
+
+html.dark .feature-text {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .features { align-items: center; }
+  .feature-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+  }
+  .feature-title { min-width: auto; }
+}
