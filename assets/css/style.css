@@ -119,3 +119,14 @@ html.dark .footer-fixed {
   color: var(--text);
   opacity: 0.75;
 }
+
+/* ---------- Ajuste de espaçamento inferior da seção de destaques ---------- */
+.features {
+  margin-bottom: 6rem; /* Garante espaço livre acima do rodapé fixo */
+}
+
+@media (max-height: 700px) {
+  .features {
+    margin-bottom: 4rem;
+  }
+}
