@@ -98,35 +98,3 @@ footer{margin:2.2rem 0 3rem; text-align:center; color:var(--muted)}
 /* small tweaks */
 html.dark .feature-item{background:rgba(255,255,255,0.03)}
 html.dark .feature-text{color:var(--text)}
-
-/* ---------- Rodapé Institucional Fixo ---------- */
-.footer-fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  color: var(--muted);
-  background: transparent;
-  padding: 0.5rem 0;
-  opacity: 0.85;
-  z-index: 100;
-}
-
-html.dark .footer-fixed {
-  color: var(--text);
-  opacity: 0.75;
-}
-
-/* ---------- Ajuste de espaçamento inferior da seção de destaques ---------- */
-.features {
-  margin-bottom: 6rem; /* Garante espaço livre acima do rodapé fixo */
-}
-
-@media (max-height: 700px) {
-  .features {
-    margin-bottom: 4rem;
-  }
-}
