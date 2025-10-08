@@ -98,3 +98,58 @@ footer{margin:2.2rem 0 3rem; text-align:center; color:var(--muted)}
 /* small tweaks */
 html.dark .feature-item{background:rgba(255,255,255,0.03)}
 html.dark .feature-text{color:var(--text)}
+
+/* ---------- Ajuste automático ao viewport ---------- */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+}
+
+header {
+  margin-bottom: 0.8rem;
+}
+
+.features {
+  flex: 1;
+  min-width: 320px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+/* Ajuste em telas menores */
+@media (max-height: 800px) {
+  body {
+    transform: scale(0.95);
+    transform-origin: top center;
+  }
+}
+
+@media (max-height: 700px) {
+  body {
+    transform: scale(0.9);
+  }
+}
