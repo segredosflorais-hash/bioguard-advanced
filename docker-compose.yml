@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  supabase:
+    image: supabase/local-dev:latest
+    container_name: bioguard_supabase
+    ports:
+      - "54321:54321"
+      - "54322:54322"
+      - "8000:8000"
+    environment:
+      SUPABASE_DB_PASSWORD: "bioguard_local"
+      JWT_SECRET: "bio-guard-secure-key"
+      ANON_KEY: "bio-guard-anon"
+    volumes:
+      - ./supabase_data:/var/lib/postgresql/data
