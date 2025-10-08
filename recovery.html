@@ -1,35 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recuperar Senha | BioGuard Sentinel</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recuperar Senha — BioGuard Sentinel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
-<body class="dark-mode">
-  <header>
-    <img src="assets/images/bioguard-logo.svg" alt="Logo BioGuard Sentinel" class="logo">
-    <h1>BioGuard Sentinel</h1>
-    <p class="slogan">Minutos Salvam Vidas</p>
-  </header>
-
-  <main class="login-container">
-    <h2>Recuperação de Senha</h2>
-    <form class="recovery-form" autocomplete="off">
-      <label for="recovery-email">E-mail cadastrado</label>
-      <input type="email" id="recovery-email" name="email" placeholder="Digite seu e-mail" required>
-
+<body>
+  <main style="max-width:720px;margin:4rem auto;padding:1rem">
+    <h1 class="brand-title" style="text-align:center">Recuperar Senha</h1>
+    <form id="recoveryForm" style="background:var(--card-bg);padding:1rem;border-radius:10px;">
+      <label for="reco-email">E-mail cadastrado</label>
+      <input id="reco-email" type="email" placeholder="seu@hospital.org" required>
+      <p style="margin:.6rem 0;color:var(--muted)">Enviaremos um link para redefinição. No passo seguinte será solicitado: nova senha e confirmação (dupla verificação).</p>
       <button type="submit" class="btn-primary">Enviar Link de Redefinição</button>
-
-      <p class="forgot"><a href="login.html">Voltar ao login</a></p>
     </form>
   </main>
 
-  <footer>
-    <p>© 2025 BioGuard Sentinel — Dispositivo Médico Classe I</p>
-  </footer>
-
-  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      const form = document.getElementById("recoveryForm");
+      if (!form) return;
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+        const email = (document.getElementById("reco-email")||{}).value || "";
+        if (!email) { alert("Preencha o e-mail."); return; }
+        // Mock: em produção integrar com Supabase Auth / SMTP para envio de link.
+        alert("Link de redefinição enviado para: " + email + "\n(Simulado)");
+        // opcional redirect to set-new-password.html
+      });
+    });
+  </script>
 </body>
 </html>

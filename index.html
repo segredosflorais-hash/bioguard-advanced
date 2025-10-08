@@ -1,46 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BioGuard Sentinel</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BioGuard Sentinel — Minutos Salvam Vidas</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header class="header">
-    <img src="assets/images/bioguard-logo.svg" alt="BioGuard Sentinel Logo" class="logo" />
-    <h1>BioGuard Sentinel</h1>
-    <p class="slogan">Minutos Salvam Vidas</p>
-    <!-- Botão de alternância de tema (Neon Adaptive SVG) -->
-<!-- Botão de alternância de tema (Neon Adaptive SVG) -->
-<button class="theme-toggle" id="themeToggle" title="Alternar tema" aria-label="Alternar tema">
-  <svg class="theme-icon" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-    <path id="themePath" fill="currentColor" d="M12 3a9 9 0 0 0 0 18c4.97 0 9-4.03 9-9a9 9 0 0 0-9-9z"/>
-  </svg>
-</button>
+  <header>
+    <button class="theme-toggle" id="themeToggle" title="Alternar tema" aria-label="Alternar tema">
+      <svg class="theme-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+        <path id="themePath" fill="currentColor" d="M12 3a9 9 0 0 0 0 18c4.97 0 9-4.03 9-9a9 9 0 0 0-9-9z"></path>
+      </svg>
+    </button>
+
+    <div class="brand">
+      <img src="assets/images/bioguard-logo.svg" alt="BioGuard Sentinel" class="logo" />
+      <h1 class="brand-title">BioGuard Sentinel</h1>
+      <p class="slogan">Minutos Salvam Vidas</p>
+    </div>
   </header>
 
-  <main>
-    <section class="buttons">
-      <button class="info-btn" data-info="Rapidez: diagnósticos e alertas otimizados.">Rapidez</button>
-      <button class="info-btn" data-info="Foco: auxílio no controle da sepse.">Foco</button>
-      <button class="info-btn" data-info="Confiabilidade: decisões baseadas em evidências.">Confiabilidade</button>
-    </section>
-
-    <section class="form-section">
-      <h2>Acesso Médico</h2>
-      <form class="login-form">
-        <input type="text" placeholder="Nome completo" required />
-        <input type="text" placeholder="CRM" required />
-        <input type="email" placeholder="E-mail" required />
-        <div class="password-field">
-          <input type="password" placeholder="Senha" id="password" required />
-          <span id="togglePassword" class="eye">👁️</span>
+  <main class="main-wrap">
+    <div class="content-grid">
+      <!-- Blocos estáticos informativos (alinhados à esquerda) -->
+      <aside class="features" aria-hidden="false">
+        <div class="feature-item">
+          <div class="feature-title">Rapidez</div>
+          <div class="feature-text">Diagnóstico assistido em segundos — decisões clínicas aceleradas.</div>
         </div>
-        <button type="submit">Entrar</button>
-        <a href="#" class="forgot">Esqueci minha senha</a>
-      </form>
-    </section>
+
+        <div class="feature-item">
+          <div class="feature-title">Foco</div>
+          <div class="feature-text">Interface objetiva para casos de sepse; zero ruído, máxima relevância.</div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-title">Confiabilidade</div>
+          <div class="feature-text">Respostas contextualizadas por diretrizes, auditáveis e com disclaimer.</div>
+        </div>
+      </aside>
+
+      <!-- Área central: links minimalistas Login / Cadastro -->
+      <section class="center-actions" aria-label="Ações principais">
+        <div class="actions-row">
+          <a href="#" id="loginLink" class="action-link">Login</a>
+          <a href="cadastro.html" class="action-link">Cadastro</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Modal de Login (invisível por padrão) -->
+    <div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle">
+      <div class="modal-overlay" data-close="true"></div>
+      <div class="modal-panel" role="document">
+        <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+        <h2 id="loginTitle">Login</h2>
+
+        <form id="modalLoginForm" class="login-modal-form" autocomplete="off">
+          <label for="modal-email">E-mail profissional</label>
+          <input id="modal-email" name="email" type="email" placeholder="seu@hospital.org" required>
+
+          <label for="modal-password">Senha</label>
+          <div class="password-field">
+            <input id="modal-password" name="password" type="password" placeholder="Digite sua senha" required>
+            <button type="button" class="eye-btn" id="eyeToggle" aria-label="Mostrar senha">
+              <!-- svg eye (aberto) -->
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                <path id="eyeOpen" fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5C21.27 7.61 17 4.5 12 4.5zm0 12a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"></path>
+                <path id="eyeClosed" fill="currentColor" d="M2 2l20 20" style="display:none;"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn-primary">Entrar</button>
+          </div>
+
+          <p class="modal-foot">
+            <a href="recovery.html" class="link-muted">Esqueci minha senha</a>
+          </p>
+        </form>
+      </div>
+    </div>
   </main>
 
   <footer>
@@ -50,7 +96,3 @@
   <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-
-
