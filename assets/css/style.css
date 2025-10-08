@@ -153,3 +153,65 @@ header {
     transform: scale(0.9);
   }
 }
+
+/* ---------- Ajustes finos de layout (v0.4.11-green-tuning) ---------- */
+
+/* Botão de tema fixo no canto superior direito */
+.theme-toggle {
+  position: fixed !important;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 1200;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: var(--accent);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  color: var(--accent-dark);
+}
+
+/* Placeholders (Rapidez / Foco / Confiabilidade) */
+.features {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.feature-item {
+  transform: scale(1.05);
+  padding: 1.6rem 2rem;
+  border-radius: 14px;
+}
+
+.feature-title {
+  font-size: 1.6rem;
+}
+
+.feature-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Rodapé institucional fixo */
+.bioguard-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  background: rgba(0,0,0,0.1);
+  backdrop-filter: blur(6px);
+  padding: 0.4rem 0;
+  letter-spacing: 0.3px;
+  z-index: 1000;
+}
+
+html.dark .bioguard-footer {
+  color: var(--text);
+  background: rgba(255,255,255,0.03);
+}
