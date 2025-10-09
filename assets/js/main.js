@@ -426,3 +426,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+/* === Hotfix v0.5.3.2a — inicialização automática de especialidades === */
+document.addEventListener("DOMContentLoaded", () => {
+  try {
+    if (typeof loadSpecialtiesFromJSON === "function") {
+      loadSpecialtiesFromJSON();
+      console.log("🔄 Especialidades inicializadas automaticamente.");
+    } else {
+      console.warn("⚠️ Função loadSpecialtiesFromJSON não encontrada.");
+    }
+  } catch (err) {
+    console.warn("⚠️ Falha ao inicializar especialidades:", err.message);
+  }
+});
