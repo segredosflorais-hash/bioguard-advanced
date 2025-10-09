@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
 <script src="assets/js/env.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>`n<a href="index.html" class="btn-voltar">← Voltar</a>
   <header>
@@ -107,15 +108,7 @@ Cadastrar</button>
   <script src="assets/js/env.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 <!-- Termos Modal -->
-<div id="termsModal" class="modal" style="display:none;">
-  <div class="modal-inner">
-    <h3>Termos e Condições de Uso</h3>
-    <div class="terms-content" style="max-height:360px;overflow:auto;padding:0.5rem 1rem;background:var(--card-bg);border-radius:8px">
-      <!-- O conteúdo completo pode ser carregado de assets/terms/termos-uso-bioguard.md convertendo para HTML -->
-      <p><strong>Leia com atenção:</strong> Ao aceitar, você confirma a veracidade dos dados e concorda com a política de uso do BioGuard Sentinel.</p>
-      <p>... (substitua pelo documento oficial em assets/terms/)</p>
-    </div>
-    <div style="margin-top:1rem;text-align:right">
+<div style="margin-top:1rem;text-align:right">
       <button id="termsClose" class="btn-secundary">Fechar</button>
       <button id="termsAccept" class="btn-primary">Aceito os Termos</button>
     </div>
@@ -126,8 +119,23 @@ Cadastrar</button>
 .modal { position: fixed; left:0;top:0;right:0;bottom:0; display:flex; align-items:center; justify-content:center; z-index:9999; background: rgba(0,0,0,0.45); }
 .modal-inner { background: var(--bg); color: var(--text); padding: 1.2rem; border-radius: 10px; width: min(740px, 96%); box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
 </style>
+<!-- Termos Modal -->
+<div id="termsModal" class="modal" style="display:none;">
+  <div class="modal-inner">
+    <h3>Termos e Condições de Uso</h3>
+    <div id="termsContentHtml" class="terms-content" style="max-height:420px;overflow:auto;padding:0.75rem;background:var(--card-bg);border-radius:8px">
+      <p>Carregando termos...</p>
+    </div>
+    <div style="margin-top:1rem;text-align:right">
+      <button id="termsClose" class="btn-secundary">Fechar</button>
+      <button id="termsAccept" class="btn-primary">Aceito os Termos</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+
+
 
 
 

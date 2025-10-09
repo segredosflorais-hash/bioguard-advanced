@@ -326,3 +326,64 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+/* --- Markdown terms loader (v0.5.3.1) --- */
+async function loadTermsMarkdownToModal(forceReload = false) {
+  const container = document.getElementById("termsContentHtml");
+  if (!container) return;
+  // if already loaded and not forced, skip
+  if (!forceReload && container.dataset.loaded === "1") return;
+  try {
+    const resp = await fetch("assets/terms/termos-uso-bioguard.md", { cache: "no-store" });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const md = await resp.text();
+    if (window.marked && typeof window.marked.parse === "function") {
+      container.innerHTML = window.marked.parse(md);
+    } else {
+      // fallback minimal converter (very small subset)
+      let html = md
+        .replace(/\r/g, "")
+        .replace(/\n{2,}/g, "</p><p>")   // paragraphs
+        .replace(/(^|\r\n|\n)###\s+(.*?)(?=\n|$)/g, "<h3>$2</h3>")
+        .replace(/(^|\r\n|\n)##\s+(.*?)(?=\n|$)/g, "<h2>$2</h2>")
+        .replace(/(^|\r\n|\n)#\s+(.*?)(?=\n|$)/g, "<h1>$2</h1>")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*(.*?)\*/g, "<em>$1</em>")
+        .replace(/\[(.*?)\]\((.*?)\)/g, "<a href=\"$2\" target=\"_blank\">$1</a>");
+      container.innerHTML = "<p>" + html + "</p>";
+    }
+    container.dataset.loaded = "1";
+  } catch (err) {
+    container.innerHTML = "<p><em>Erro ao carregar termos: " + (err.message || err) + "</em></p>";
+    console.warn("loadTermsMarkdownToModal:", err);
+  }
+}
+
+/* bind open-terms to load and open the modal (idempotent) */
+document.addEventListener("click", function (e) {
+  const a = e.target.closest && e.target.closest(".open-terms");
+  if (!a) return;
+  e.preventDefault();
+  const modal = document.getElementById("termsModal");
+  if (!modal) return;
+  loadTermsMarkdownToModal().then(() => {
+    modal.style.display = "flex";
+  });
+});
+
+/* keep existing close/accept handlers safe (if they already exist, this will not duplicate id logic) */
+document.addEventListener("DOMContentLoaded", function () {
+  const btnClose = document.getElementById("termsClose");
+  const btnAccept = document.getElementById("termsAccept");
+  const modal = document.getElementById("termsModal");
+  if (btnClose) btnClose.addEventListener("click", ()=> { if (modal) modal.style.display = "none"; });
+  if (btnAccept) {
+    btnAccept.addEventListener("click", ()=>{
+      localStorage.setItem("bio_terms_accepted", "1");
+      const ch = document.getElementById("aceite-termos");
+      if (ch) ch.checked = true;
+      if (modal) modal.style.display = "none";
+      alert("Termos aceitos e salvos localmente.");
+    });
+  }
+});
