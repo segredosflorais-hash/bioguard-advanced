@@ -1,0 +1,23 @@
+{
+  "Clínica Médica": ["Endocrinologia","Gastroenterologia","Hematologia","Infectologia","Nefrologia","Pneumologia","Reumatologia"],
+  "Cardiologia": ["Hemodinâmica","Arritmologia","Insuficiência Cardíaca","Cardiologia Pediátrica"],
+  "Cirurgia": ["Geral","Cardíaca","Torácica","Plástica","Vascular","Pediátrica"],
+  "Pediatria": ["Neonatologia","Cardiologia Pediátrica","Neuropediatria","Endocrinologia Pediátrica"],
+  "Ginecologia e Obstetrícia": ["Obstetrícia de Alto Risco","Medicina Fetal","Uroginecologia"],
+  "Ortopedia": ["Traumatologia","Ortopedia Pediátrica","Coluna","Mão"],
+  "Neurologia": ["Neurointensivismo","Neuropediatria","Neurofisiologia"],
+  "Psiquiatria": ["Psiquiatria Geriátrica","Psiquiatria Infantil"],
+  "Oncologia": ["Oncologia Clínica","Cirurgia Oncológica","Radioterapia"],
+  "Dermatologia": ["Cirurgia Dermatológica","Cosmiatria"],
+  "Anestesiologia": ["Anestesiologia Regional","Dor"],
+  "Radiologia": ["Diagnóstica","Intervencionista"],
+  "Medicina Intensiva": ["Adulto","Pediátrica","Neonatal"],
+  "Medicina do Trabalho": ["Perícia","Saúde Ocupacional"],
+  "Medicina de Família e Comunidade": ["Atenção Primária"],
+  "Urologia": ["Andrologia","Litíase","Oncológica"],
+  "Oftalmologia": ["Cirurgia de Catarata","Retina"],
+  "Otorrinolaringologia": ["Otologia","Rinologia","Laringologia"],
+  "Geriatria": ["Cuidados Paliativos"],
+  "Endocrinologia": ["Diabetologia"],
+  "Outras": ["Medicina de Emergência","Medicina Legal","Nutrologia"]
+}

@@ -6,6 +6,9 @@
   <title>Cadastro Médico | BioGuard Sentinel</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+<script src="assets/js/env.js"></script>
+<script src="assets/js/main.js"></script>
 </head>
 <body>`n<a href="index.html" class="btn-voltar">← Voltar</a>
   <header>
@@ -81,6 +84,7 @@
             <input type="checkbox" id="aceite-termos" required />
             Confirmo a veracidade das informações e concordo com os termos.
           </label>
+<p><a href='#' class='open-terms' style='font-family:Inter, sans-serif;font-size:0.95rem;'>Ler Termos e Condições</a></p>
         </div>
 
         <div class="actions">
@@ -102,6 +106,29 @@ Cadastrar</button>
 
   <script src="assets/js/env.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+<!-- Termos Modal -->
+<div id="termsModal" class="modal" style="display:none;">
+  <div class="modal-inner">
+    <h3>Termos e Condições de Uso</h3>
+    <div class="terms-content" style="max-height:360px;overflow:auto;padding:0.5rem 1rem;background:var(--card-bg);border-radius:8px">
+      <!-- O conteúdo completo pode ser carregado de assets/terms/termos-uso-bioguard.md convertendo para HTML -->
+      <p><strong>Leia com atenção:</strong> Ao aceitar, você confirma a veracidade dos dados e concorda com a política de uso do BioGuard Sentinel.</p>
+      <p>... (substitua pelo documento oficial em assets/terms/)</p>
+    </div>
+    <div style="margin-top:1rem;text-align:right">
+      <button id="termsClose" class="btn-secundary">Fechar</button>
+      <button id="termsAccept" class="btn-primary">Aceito os Termos</button>
+    </div>
+  </div>
+</div>
+<style>
+/* modal básico, estilize em style.css conforme necessidade */
+.modal { position: fixed; left:0;top:0;right:0;bottom:0; display:flex; align-items:center; justify-content:center; z-index:9999; background: rgba(0,0,0,0.45); }
+.modal-inner { background: var(--bg); color: var(--text); padding: 1.2rem; border-radius: 10px; width: min(740px, 96%); box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+</style>
 </body>
 </html>
+
+
+
 

@@ -175,3 +175,154 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+/* === Etapa 2 additions: specialties loader, terms modal, and Supabase auth helpers === */
+
+async function loadSpecialtiesFromJSON() {
+  try {
+    const res = await fetch("assets/data/specialties.json", {cache: "no-store"});
+    if (!res.ok) throw new Error("Falha ao carregar specialties.json");
+    const data = await res.json();
+    const espSel = document.getElementById("especialidade");
+    const subSel = document.getElementById("subespecialidade");
+    if (!espSel) return;
+    // limpa
+    espSel.innerHTML = "<option value=\"\">Selecione</option>";
+    Object.keys(data).forEach(key => {
+      const opt = document.createElement("option");
+      opt.value = key; opt.textContent = key;
+      espSel.appendChild(opt);
+    });
+    espSel.addEventListener("change", () => {
+      const list = data[espSel.value] || [];
+      subSel.innerHTML = "<option value=\"\">Selecione</option>";
+      list.forEach(s => {
+        const op = document.createElement("option"); op.value = s; op.textContent = s;
+        subSel.appendChild(op);
+      });
+    });
+  } catch (err) {
+    console.warn("loadSpecialtiesFromJSON:", err.message);
+  }
+}
+
+/* Terms modal logic */
+(function() {
+  const modal = document.getElementById("termsModal");
+  const btnAccept = document.getElementById("termsAccept");
+  const btnClose = document.getElementById("termsClose");
+  // open link(s)
+  document.querySelectorAll(".open-terms").forEach(el=>{
+    el.addEventListener("click", (e)=>{
+      e.preventDefault();
+      if (modal) modal.style.display = "flex";
+    });
+  });
+  if (btnClose) btnClose.addEventListener("click", ()=> modal.style.display = "none");
+  if (btnAccept) {
+    btnAccept.addEventListener("click", ()=>{
+      localStorage.setItem("bio_terms_accepted", "1");
+      modal.style.display = "none";
+      // if there's a checkbox for acceptance, check it
+      const ch = document.getElementById("aceite-termos");
+      if (ch) { ch.checked = true; }
+    });
+  }
+})();
+
+/* Supabase auth helpers (Zone: Amarela — ajuste se SDK mudar) */
+async function signUpWithSupabase({email, password, metadata}) {
+  if (!window.supabase) throw new Error("Supabase SDK não carregado");
+  try {
+    const res = await supabase.auth.signUp({ email, password }, { data: metadata });
+    return res;
+  } catch (err) {
+    return { error: err };
+  }
+}
+
+async function signInWithSupabase({email, password}) {
+  if (!window.supabase) throw new Error("Supabase SDK não carregado");
+  try {
+    // signInWithPassword é a forma v2; se sua SDK for v1 adapte para signIn
+    const res = await supabase.auth.signInWithPassword({ email, password });
+    return res;
+  } catch (err) {
+    return { error: err };
+  }
+}
+
+async function sendPasswordResetEmail(email) {
+  if (!window.supabase) throw new Error("Supabase SDK não carregado");
+  try {
+    // Tentativa com API v2:
+    const res = await supabase.auth.resetPasswordForEmail(email);
+    return res;
+  } catch (err) {
+    // fallback (versões antigas)
+    try {
+      const res2 = await supabase.auth.api.resetPasswordForEmail(email);
+      return res2;
+    } catch (err2) {
+      return { error: err2 };
+    }
+  }
+}
+
+/* Hook forms if present */
+document.addEventListener("DOMContentLoaded", () => {
+  loadSpecialtiesFromJSON();
+
+  // cadastro form (if exists)
+  const reg = document.getElementById("registerForm");
+  if (reg) {
+    reg.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fullname = reg.fullname.value.trim();
+      const email = reg.email.value.trim();
+      const pw = reg.password.value;
+      const confirm = reg.confirm.value;
+      const accepted = document.getElementById("aceite-termos")?.checked;
+      if (!fullname || !email || !pw || !confirm) { alert("Preencha os campos obrigatórios."); return; }
+      if (!accepted) { alert("Você deve aceitar os Termos."); return; }
+      if (pw !== confirm) { alert("Senhas não coincidem."); return; }
+      // call supabase signUp
+      try {
+        const metadata = { fullname, crm: reg.crm?.value || null, uf: reg.uf?.value || null };
+        const { data, error } = await signUpWithSupabase({ email, password: pw, metadata });
+        if (error) { alert("Erro ao cadastrar: " + (error.message || JSON.stringify(error))); return; }
+        alert("Cadastro realizado. Verifique seu e-mail para confirmação (se habilitado).");
+        reg.reset();
+      } catch (err) {
+        alert("Erro inesperado: " + err.message);
+      }
+    });
+  }
+
+  // login form (if exists)
+  const loginForm = document.querySelector(".login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = loginForm.querySelector('input[type="email"]').value.trim();
+      const password = loginForm.querySelector('input[type="password"]').value;
+      if (!email || !password) { alert("Preencha e-mail e senha."); return; }
+      const { data, error } = await signInWithSupabase({ email, password });
+      if (error) { alert("Erro login: " + (error.message||JSON.stringify(error))); return; }
+      alert("Login efetuado (simulado). Redirecionar conforme fluxo (implemente dashboard).");
+    });
+  }
+
+  // recovery form
+  const recovery = document.querySelector(".recovery-form");
+  if (recovery) {
+    recovery.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("recovery-email").value.trim();
+      if (!email) { alert("Informe seu e-mail."); return; }
+      const res = await sendPasswordResetEmail(email);
+      if (res?.error) { alert("Erro ao enviar e-mail de recuperação: " + (res.error.message || JSON.stringify(res.error))); return; }
+      alert("Se o e-mail estiver cadastrado, você receberá instruções para redefinir a senha.");
+    });
+  }
+});
