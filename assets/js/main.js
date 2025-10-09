@@ -326,3 +326,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+/* === Correções v0.5.3.1 === */
+async function loadTermsContent(){
+  const modal=document.getElementById("termsModal");
+  const content=modal?.querySelector(".terms-content");
+  if(!content) return;
+  try{
+    const res=await fetch("assets/terms/termos-uso-bioguard.md");
+    if(!res.ok) throw new Error("Arquivo não encontrado");
+    const text=await res.text();
+    if(window.marked){ content.innerHTML=marked.parse(text); }
+    else{ content.innerHTML=text.replace(/\n/g,"<br>"); }
+  }catch(err){ content.innerHTML="<p>Erro: "+err.message+"</p>"; }
+}
+document.querySelectorAll(".open-terms").forEach(el=>{
+  el.addEventListener("click",(e)=>{
+    e.preventDefault();loadTermsContent();
+    document.getElementById("termsModal").style.display="flex";
+  });
+});
