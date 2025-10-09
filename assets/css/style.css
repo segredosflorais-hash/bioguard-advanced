@@ -1,100 +1,108 @@
 /* ===================================================
-   BioGuard Sentinel — UI (v0.4.8) — clean rebuild
-   Fonts: Orbitron (titles), Inter (UI)
-   Theme controlled by html.dark
+   BioGuard Sentinel — Neon Adaptive Core Styles
+   v0.5.1 (Zona Verde): theme, grid, modals, forms
    =================================================== */
 
-:root{
-  --bg:#eafff4;
-  --text:#013b2a;
-  --muted:#0f5b42;
-  --accent:#00ffc2;
-  --accent-dark:#00b98b;
-  --card-bg: rgba(255,255,255,0.88);
-  --input-bg: #ffffff;
-  --action-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  --title-font: "Orbitron", sans-serif;
+/* Fonts */
+:root {
+  --bg: #eafff4;
+  --text: #013b2a;
+  --muted: #0f5b42;
+  --accent: #00c999;
+  --accent-dark: #00b37a;
+  --card-bg: rgba(255,255,255,0.9);
+  --footer-height: 56px;
+  --max-width: 1100px;
 }
 
-/* Dark theme tokens */
-html.dark{
-  --bg:#011c13;
-  --text:#e0fff5;
-  --muted:#9bd7b9;
-  --accent:#00ffd6;
-  --accent-dark:#00c999;
+/* dark theme variables (applied to <html>.dark) */
+html.dark {
+  --bg: #011d15;
+  --text: #e7fff6;
+  --muted: #9bd7b9;
+  --accent: #00ffd6;
+  --accent-dark: #00c999;
   --card-bg: rgba(255,255,255,0.04);
-  --input-bg: rgba(255,255,255,0.03);
 }
 
-/* Global */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family: var(--action-font);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  transition: background .35s ease, color .35s ease;
-  text-align:center;
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
 }
 
-/* Header / Brand */
-header{padding:2rem 1rem; position:relative}
-.brand{max-width:980px;margin:0 auto}
-.logo{width:110px;display:block;margin:0 auto 0.6rem;filter:drop-shadow(0 0 6px var(--accent-dark))}
-.brand-title{font-family:var(--title-font); font-size:2.4rem; margin:0; letter-spacing:0.5px; font-weight:700}
-.slogan{font-family:var(--action-font); font-size:1.15rem; color:var(--muted); margin-top:0.35rem}
+/* header / brand */
+header {
+  padding: 1.6rem 1rem;
+  text-align: center;
+  position: relative;
+}
+.brand {
+  display: inline-block;
+  text-align: center;
+}
+.logo { width: 110px; display: block; margin: 0 auto 8px; filter: drop-shadow(0 0 6px var(--accent-dark)); }
+.brand-title { font-family: "Orbitron", sans-serif; font-size: 2.6rem; margin: 0; line-height: 1; }
+.slogan { font-family: "Orbitron", sans-serif; font-size: 1.15rem; margin: 6px 0 0; color: var(--muted); }
 
-/* Theme toggle */
-.theme-toggle{position:absolute; top:1rem; right:1rem; border:none; background:transparent; cursor:pointer; color:var(--accent-dark)}
-.theme-toggle:hover{transform:rotate(10deg)}
+/* theme toggle */
+.theme-toggle { position: absolute; top: 14px; right: 14px; background: transparent; border: none; cursor: pointer; color: var(--accent-dark); padding: 6px; border-radius: 8px; }
+.theme-toggle .theme-icon { display:block; }
 
-/* Main grid: features (left) + center actions */
-.main-wrap{max-width:1200px;margin:2rem auto;padding:0 1rem}
-.content-grid{display:flex;gap:2rem;align-items:flex-start; justify-content:center; align-items:stretch}
-.features{flex:0 0 420px; text-align:left}
-.feature-item{background:var(--card-bg); border-radius:12px; padding:1rem 1.25rem; margin-bottom:1rem; box-shadow:0 6px 20px rgba(0,0,0,0.06)}
-.feature-title{font-family:var(--title-font); font-size:1.25rem; color:var(--accent); margin-bottom:0.35rem; font-weight:600}
-.feature-text{font-family:var(--action-font); color:var(--muted); line-height:1.45; font-size:0.98rem}
+/* page grid layout */
+main { min-height: calc(100vh - var(--footer-height) - 120px); padding: 1.2rem; display:flex; justify-content:center; align-items:flex-start; }
+.page-grid { display: grid; gap: 2rem; width: 100%; max-width: var(--max-width); grid-template-columns: minmax(300px, 1fr) 260px; align-items:start; }
 
-/* Center actions */
-.center-actions{flex:1 1 auto; display:flex; align-items:center; justify-content:center}
-.actions-row{display:flex; gap:1.25rem; flex-direction:column; align-items:center}
-.action-link{display:inline-block; min-width:160px; padding:0.9rem 1.1rem; border-radius:10px; text-decoration:none; font-family:var(--action-font); font-weight:300; color:var(--text); background:linear-gradient(90deg,var(--accent),var(--accent-dark)); box-shadow:0 12px 30px rgba(0,0,0,0.12)}
-html.dark .action-link{background:none; background-color:transparent; color:#fff; border:1px solid rgba(255,255,255,0.06); padding:0.6rem 1rem; min-width:140px}
-.action-link:hover{opacity:0.95; transform:translateY(-2px)}
+/* features column */
+.features { padding: 0; margin: 0; }
+.feature-item { background: var(--card-bg); border-radius: 12px; padding: 1.2rem 1.4rem; margin-bottom: 1.1rem; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.feature-title { font-family: "Orbitron", sans-serif; font-weight:600; font-size:1.25rem; color: var(--accent); }
+.feature-text { font-family: "Inter", sans-serif; font-size: 1rem; color: var(--muted); line-height:1.4; margin: 0.4rem 0 0; }
 
-/* Modal (login) */
-.modal{display:none}
-.modal.open{display:block}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55)}
-.modal-panel{position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); width:min(520px,90%); background:var(--card-bg); padding:1.25rem 1.4rem; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.45); z-index:1001; text-align:left}
-.modal-close{position:absolute; right:12px; top:10px; border:none; background:transparent; font-size:1.1rem; cursor:pointer; color:var(--muted)}
-.login-modal-form label{display:block; margin-top:0.75rem; font-weight:600; color:var(--muted)}
-.login-modal-form input{width:100%; padding:0.7rem; margin-top:0.3rem; border-radius:8px; border:1px solid rgba(0,0,0,0.08); background:var(--input-bg); color:var(--text)}
-.password-field{position:relative; display:flex; align-items:center}
-.eye-btn{position:absolute; right:10px; top:8px; border:none; background:transparent; width:34px; height:34px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--muted)}
-.modal-actions{margin-top:1.1rem}
-.btn-primary{width:100%; padding:0.8rem; border-radius:10px; border:none; font-weight:600; background:var(--accent); color:#013b2a; cursor:pointer}
-.btn-primary:hover{background:var(--accent-dark);}
-.modal-foot{margin-top:0.8rem; text-align:left}
-.link-muted{color:var(--muted); text-decoration:underline}
+/* auth column */
+.auth-column { display:flex; align-items:center; justify-content:center; gap: 1rem; padding-top: 2rem; flex-direction: column; }
+.auth-link { display:inline-block; text-decoration:none; font-family: "Inter", sans-serif; font-weight:400; color: var(--text); background: rgba(255,255,255,0.03); padding: 0.65rem 1rem; border-radius: 10px; width:140px; text-align:center; border: 1px solid rgba(0,0,0,0.04); }
+html.dark .auth-link { color:#fff; background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
 
-/* Footer */
-footer{margin:2.2rem 0 3rem; text-align:center; color:var(--muted)}
+/* centered forms / modal */
+.centered-page { display:flex; align-items:center; justify-content:center; min-height: calc(100vh - var(--footer-height) - 120px); padding: 1.2rem; }
+.form-section, .card, .login-container { background: var(--card-bg); border-radius:12px; padding: 1.4rem; width: 100%; max-width: 560px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
 
-/* Responsiveness */
-@media (max-width:900px){
-  .content-grid{flex-direction:column; align-items:center}
-  .features{width:100%; order:1}
-  .center-actions{order:2; margin-top:0.8rem}
-  .actions-row{flex-direction:row}
-  .action-link{min-width:120px; padding:0.7rem 0.9rem}
+/* labels & inputs */
+label { display:block; font-weight:500; color: var(--muted); margin-top: 0.8rem; margin-bottom: 0.3rem; }
+input[type="text"], input[type="email"], input[type="password"], select, textarea { width:100%; padding:0.7rem; border-radius:8px; border:1px solid rgba(0,0,0,0.07); background: rgba(255,255,255,0.95); color: var(--text); font-size:1rem; box-sizing:border-box; }
+html.dark input, html.dark select { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); color: var(--text); }
+
+/* password eye */
+.password-field { position:relative; display:flex; align-items:center; gap:8px; }
+.toggle-pass { background:transparent; border:none; cursor:pointer; padding:6px; }
+
+/* buttons */
+.btn-primary { display:inline-block; background: var(--accent); color:#013b2a; border:none; padding:0.8rem 1rem; border-radius:8px; cursor:pointer; font-weight:600; width:100%; margin-top:1rem; }
+.btn-primary:hover { background: var(--accent-dark); color:#fff; }
+
+/* modal */
+.modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 1.2rem; background: rgba(2,6,4,0.45); z-index: 80; }
+.modal[aria-hidden="false"] { display:flex; }
+.modal-content { background: var(--card-bg); border-radius:12px; padding: 1.4rem; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); position:relative; }
+.modal-close { position:absolute; top:10px; right:10px; background:transparent; border:none; font-size:20px; cursor:pointer; color:var(--muted); }
+
+/* footer fixed but not overlapping content (body padding-bottom ensures space) */
+footer { position: fixed; bottom:0; left:0; width:100%; height: var(--footer-height); display:flex; align-items:center; justify-content:center; background:transparent; z-index:70; color:var(--muted); font-size:0.9rem; }
+body { padding-bottom: calc(var(--footer-height) + 8px); }
+
+/* responsive */
+@media (max-width: 900px) {
+  .page-grid { grid-template-columns: 1fr; }
+  .auth-column { flex-direction: row; gap: 0.6rem; padding-top: 0.5rem; }
+  .brand-title { font-size: 2rem; }
 }
 
-/* small tweaks */
-html.dark .feature-item{background:rgba(255,255,255,0.03)}
-html.dark .feature-text{color:var(--text)}
+/* accessibility visually-hidden */
+.visually-hidden { position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }

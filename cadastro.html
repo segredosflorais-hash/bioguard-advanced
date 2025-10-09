@@ -3,71 +3,98 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cadastro Médico — BioGuard Sentinel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Cadastro Médico | BioGuard Sentinel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <main class="main-wrap">
-    <div style="max-width:760px;margin:2rem auto">
-      <h1 class="brand-title">Cadastro Médico</h1>
-      <form id="registerForm" style="background:var(--card-bg);padding:1rem;border-radius:10px">
+  <header>
+    <div class="brand small">
+      <img src="assets/images/bioguard-logo.svg" alt="logo" class="logo small" />
+      <h1 class="brand-title small">BioGuard Sentinel</h1>
+    </div>
+  </header>
+
+  <main class="centered-page">
+    <section class="card register-card">
+      <h2>Cadastro Médico</h2>
+
+      <form id="registerForm" class="register-form" autocomplete="off" novalidate>
         <label for="fullname">Nome completo</label>
-        <input id="fullname" type="text" placeholder="Nome completo" required>
+        <input id="fullname" name="fullname" type="text" placeholder="Nome completo" required />
 
-        <div style="display:flex;gap:0.8rem;margin-top:0.6rem">
-          <div style="flex:1">
+        <div class="row-split">
+          <div>
             <label for="crm">CRM</label>
-            <input id="crm" type="text" placeholder="Ex: CRM-SP 12345">
+            <input id="crm" name="crm" type="text" placeholder="CRM - ex: CRM-SP 12345" required />
           </div>
-          <div style="width:120px">
-            <label for="uf">UF</label>
-            <select id="uf"><option value="">UF</option><option>SP</option><option>RJ</option><option>MG</option></select>
+          <div>
+            <label for="uf">UF do CRM</label>
+            <select id="uf" name="uf" required>
+              <option value="">Selecione</option>
+              <option>SP</option><option>RJ</option><option>MG</option><option>RS</option><option>PR</option>
+            </select>
           </div>
         </div>
 
-        <label for="email" style="margin-top:0.6rem">E-mail profissional</label>
-        <input id="email" type="email" placeholder="seu@hospital.org" required>
+        <label for="email">E-mail profissional</label>
+        <input id="email" name="email" type="email" placeholder="seu@hospital.org" required />
 
-        <div style="display:flex;gap:0.8rem;margin-top:0.6rem">
-          <div style="flex:1">
+        <div class="row-split">
+          <div>
             <label for="password">Senha</label>
-            <input id="password" type="password" placeholder="Crie uma senha (8+ caracteres)" required>
+            <div class="password-field login-card">
+              <input id="password" name="password" type="password" placeholder="Crie uma senha" required />
+              <button type="button" class="toggle-pass" aria-label="Mostrar senha">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zm0 2a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7z"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+              </button>
+            </div>
           </div>
-          <div style="flex:1">
-            <label for="confirm">Confirme a senha</label>
-            <input id="confirm" type="password" placeholder="Repita a senha" required>
+          <div>
+            <label for="confirm">Confirmar senha</label>
+            <div class="password-field login-card">
+              <input id="confirm" name="confirm" type="password" placeholder="Repita a senha" required />
+              <button type="button" class="toggle-pass" aria-label="Mostrar confirmação">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zm0 2a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7z"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        <p style="margin-top:0.6rem;color:var(--muted)">
-          Declaro ser o titular das informações e autorizo verificação junto aos órgãos competentes (Sou.Gov / CRM). <br>
-        </p>
+        <label for="especialidade">Especialidade</label>
+        <select id="especialidade" name="especialidade" required>
+          <option value="">Selecione</option>
+        </select>
 
-        <div style="margin-top:0.8rem;display:flex;gap:0.8rem;align-items:center">
+        <label for="subespecialidade">Subespecialidade</label>
+        <select id="subespecialidade" name="subespecialidade" required>
+          <option value="">Selecione uma especialidade primeiro</option>
+        </select>
+
+        <div class="assinatura-digital">
+          <button type="button" id="sougov-validate" class="btn-secundary">Validar com Sou.Gov</button>
+          <small id="sougov-status" class="sougov-status">Não validado</small>
+        </div>
+
+        <div class="disclaimer">
+          <label class="check">
+            <input type="checkbox" id="aceite-termos" required />
+            Confirmo a veracidade das informações e concordo com os termos.
+          </label>
+        </div>
+
+        <div class="actions">
           <button type="submit" class="btn-primary">Cadastrar</button>
-          <a href="index.html" class="link-muted">Voltar</a>
         </div>
       </form>
-    </div>
+    </section>
   </main>
 
-  <script>
-    // registro mock - aqui, integre com Supabase quando pronto
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("registerForm");
-      if (!form) return;
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const email = (document.getElementById("email")||{}).value;
-        const pw = (document.getElementById("password")||{}).value;
-        const conf = (document.getElementById("confirm")||{}).value;
-        if (pw.length < 8) { alert("Senha precisa ter ao menos 8 caracteres."); return; }
-        if (pw !== conf) { alert("Senhas não coincidem."); return; }
-        alert("Cadastro simulado recebido para: " + email + " (validar via Sou.Gov em próxima etapa)");
-        form.reset();
-      });
-    });
-  </script>
+  <footer>
+    <p>© 2025 BioGuard Sentinel — Open Source Clinical Intelligence - All Rights Reserved</p>
+  </footer>
+
+  <script src="assets/js/env.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>

@@ -3,34 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Recuperar Senha — BioGuard Sentinel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Recuperar Senha | BioGuard Sentinel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <main style="max-width:720px;margin:4rem auto;padding:1rem">
-    <h1 class="brand-title" style="text-align:center">Recuperar Senha</h1>
-    <form id="recoveryForm" style="background:var(--card-bg);padding:1rem;border-radius:10px;">
-      <label for="reco-email">E-mail cadastrado</label>
-      <input id="reco-email" type="email" placeholder="seu@hospital.org" required>
-      <p style="margin:.6rem 0;color:var(--muted)">Enviaremos um link para redefinição. No passo seguinte será solicitado: nova senha e confirmação (dupla verificação).</p>
-      <button type="submit" class="btn-primary">Enviar Link de Redefinição</button>
-    </form>
+  <header>
+    <div class="brand small">
+      <img src="assets/images/bioguard-logo.svg" alt="logo" class="logo small" />
+      <h1 class="brand-title small">BioGuard Sentinel</h1>
+    </div>
+  </header>
+
+  <main class="centered-page">
+    <section class="form-section">
+      <h2>Recuperação de Senha</h2>
+      <form id="recoveryForm" class="recovery-form" autocomplete="off">
+        <label for="recovery-email">E-mail cadastrado</label>
+        <input type="email" id="recovery-email" name="email" placeholder="Digite seu e-mail" required>
+
+        <button type="submit" class="btn-primary">Enviar Link de Redefinição</button>
+      </form>
+    </section>
   </main>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function(){
-      const form = document.getElementById("recoveryForm");
-      if (!form) return;
-      form.addEventListener("submit", function(e){
-        e.preventDefault();
-        const email = (document.getElementById("reco-email")||{}).value || "";
-        if (!email) { alert("Preencha o e-mail."); return; }
-        // Mock: em produção integrar com Supabase Auth / SMTP para envio de link.
-        alert("Link de redefinição enviado para: " + email + "\n(Simulado)");
-        // opcional redirect to set-new-password.html
-      });
-    });
-  </script>
+  <footer>
+    <p>© 2025 BioGuard Sentinel — Open Source Clinical Intelligence - All Rights Reserved</p>
+  </footer>
+
+  <script src="assets/js/env.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
