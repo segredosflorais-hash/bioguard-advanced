@@ -346,3 +346,64 @@ document.querySelectorAll(".open-terms").forEach(el=>{
     document.getElementById("termsModal").style.display="flex";
   });
 });
+
+/* === Patch v0.5.3.2 — Correção de caminhos e carregamento === */
+
+// Forçar basepath relativo correto
+function getBasePath() {
+  const loc = window.location.pathname;
+  if (loc.includes("/BioGuard-Sentinel/")) return "/BioGuard-Sentinel/assets/";
+  return "assets/";
+}
+
+// Corrigir carregamento de especialidades/subespecialidades
+async function loadSpecialtiesFromJSON() {
+  try {
+    const base = getBasePath();
+    const res = await fetch(base + "data/specialties.json", {cache: "no-store"});
+    if (!res.ok) throw new Error("Falha ao carregar specialties.json (" + res.status + ")");
+    const data = await res.json();
+    const espSel = document.getElementById("especialidade");
+    const subSel = document.getElementById("subespecialidade");
+    if (!espSel || !subSel) return;
+    espSel.innerHTML = "<option value=''>Selecione</option>";
+    Object.keys(data).forEach(key => {
+      const opt = document.createElement("option");
+      opt.value = key; opt.textContent = key;
+      espSel.appendChild(opt);
+    });
+    espSel.addEventListener("change", () => {
+      const list = data[espSel.value] || [];
+      subSel.innerHTML = "<option value=''>Selecione</option>";
+      list.forEach(s => {
+        const op = document.createElement("option");
+        op.value = s; op.textContent = s;
+        subSel.appendChild(op);
+      });
+    });
+    console.log("✅ Especialidades carregadas com sucesso.");
+  } catch (err) {
+    console.warn("⚠️ Erro ao carregar especialidades:", err.message);
+  }
+}
+
+// Corrigir carregamento dos Termos
+async function loadTermsContent() {
+  const modal = document.getElementById("termsModal");
+  const content = modal?.querySelector(".terms-content");
+  if (!content) return;
+  try {
+    const base = getBasePath();
+    const res = await fetch(base + "terms/termos-uso-bioguard.md", {cache:"no-store"});
+    if (!res.ok) throw new Error("Arquivo de Termos não encontrado");
+    const text = await res.text();
+    if (window.marked) {
+      content.innerHTML = marked.parse(text);
+    } else {
+      content.innerHTML = text.replace(/\n/g, "<br>");
+    }
+    console.log("✅ Termos carregados corretamente.");
+  } catch (err) {
+    content.innerHTML = "<p>⚠️ Erro ao carregar Termos: " + err.message + "</p>";
+  }
+}
