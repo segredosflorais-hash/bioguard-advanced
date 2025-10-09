@@ -151,3 +151,27 @@
   }
 
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const verTermos = document.getElementById("ver-termos");
+  if (verTermos) {
+    verTermos.addEventListener("click", (e) => {
+      e.preventDefault();
+      const modal = document.createElement("div");
+      modal.id = "modal-termos";
+      modal.innerHTML = `
+        <div class="modal-content">
+          <h2>Termos e Condições de Uso</h2>
+          <p>O uso do BioGuard Sentinel implica aceitação integral de suas políticas de privacidade, segurança e ética clínica. Dados são processados apenas conforme finalidades descritas.</p>
+          <p>O usuário declara ser profissional da saúde devidamente registrado, comprometendo-se com a veracidade das informações fornecidas.</p>
+          <p>© 2025 BioGuard Sentinel — Open Source Clinical Intelligence.</p>
+          <button id="fechar-termos">Fechar</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      modal.classList.add("active");
+
+      modal.querySelector("#fechar-termos").addEventListener("click", () => modal.remove());
+    });
+  }
+});

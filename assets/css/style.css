@@ -106,3 +106,58 @@ body { padding-bottom: calc(var(--footer-height) + 8px); }
 
 /* accessibility visually-hidden */
 .visually-hidden { position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+
+/* --- Estilos adicionais: botão voltar e termos --- */
+.btn-voltar {
+  display: inline-block;
+  margin: 1rem 2rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+.btn-voltar:hover { color: var(--accent-dark); }
+
+.termos-container {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.termos-container a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+html.dark .termos-container a { color: var(--accent); }
+
+/* Modal de Termos */
+#modal-termos {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+#modal-termos.active { display: flex; }
+.modal-content {
+  background: var(--card-bg);
+  color: var(--text);
+  width: 90%;
+  max-width: 700px;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+.modal-content button {
+  margin-top: 1rem;
+  background: var(--accent);
+  color: #013b2a;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
