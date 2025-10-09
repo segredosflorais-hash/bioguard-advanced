@@ -178,9 +178,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* === Etapa 2 additions: specialties loader, terms modal, and Supabase auth helpers === */
 
+async /* --- Patch v0.5.3.1: loader robusto de specialties --- */
 async function loadSpecialtiesFromJSON() {
-  try {
-    const res = await fetch("assets/data/specialties.json", {cache: "no-store"});
+  const candidatePaths = [
+    "assets/data/specialties.json",
+    "./assets/data/specialties.json",
+    window.location.origin + "/assets/data/specialties.json"
+  ];
+  let data = null;
+  for (const p of candidatePaths) {
+    try {
+      const resp = await fetch(p, { cache: "no-store" });
+      if (!resp.ok) {
+        console.warn("loadSpecialtiesFromJSON: tentativa falhou:", p, resp.status);
+        continue;
+      }
+      data = await resp.json();
+      console.log("✅ Especialidades carregadas de:", p);
+      break;
+    } catch (err) {
+      console.warn("loadSpecialtiesFromJSON: erro fetch em", p, err.message);
+    }
+  }
+
+  if (!data) {
+    console.error("❌ loadSpecialtiesFromJSON: NÃO foi possível carregar specialties.json. Verifique assets/data/specialties.json e o Live Server.");
+    return;
+  }
+
+  const espSel = document.getElementById("especialidade");
+  const subSel = document.getElementById("subespecialidade");
+  if (!espSel) { console.warn("loadSpecialtiesFromJSON: select #especialidade não encontrado"); return; }
+  if (!subSel) { console.warn("loadSpecialtiesFromJSON: select #subespecialidade não encontrado"); }
+
+  // popula especialidades
+  espSel.innerHTML = "<option value=''>Selecione</option>";
+  Object.keys(data).forEach(key => {
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = key;
+    espSel.appendChild(opt);
+  });
+
+  // handle change
+  espSel.addEventListener("change", () => {
+    const list = data[espSel.value] || [];
+    if (subSel) {
+      subSel.innerHTML = "<option value=''>Selecione</option>";
+      list.forEach(s => {
+        const op = document.createElement("option");
+        op.value = s; op.textContent = s;
+        subSel.appendChild(op);
+      });
+    }
+  });
+
+  // se quiser pré-selecionar a primeira especialidade (opcional)
+  // if (espSel.options.length > 1) espSel.selectedIndex = 0;
+}
+
+/* Garante invocação robusta */
+try {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      try { if (typeof loadSpecialtiesFromJSON === "function") loadSpecialtiesFromJSON(); } catch(e) { console.warn("Erro ao iniciar loadSpecialtiesFromJSON:", e); }
+    });
+  } else {
+    try { if (typeof loadSpecialtiesFromJSON === "function") loadSpecialtiesFromJSON(); } catch(e) { console.warn("Erro ao iniciar loadSpecialtiesFromJSON:", e); }
+  }
+} catch (err) { console.error("Patch loader: erro ao agendar carregamento", err); }
+/* --- fim Patch v0.5.3.1 --- */);
     if (!res.ok) throw new Error("Falha ao carregar specialties.json");
     const data = await res.json();
     const espSel = document.getElementById("especialidade");
@@ -357,10 +424,76 @@ function getBasePath() {
 }
 
 // Corrigir carregamento de especialidades/subespecialidades
+async /* --- Patch v0.5.3.1: loader robusto de specialties --- */
 async function loadSpecialtiesFromJSON() {
-  try {
-    const base = getBasePath();
-    const res = await fetch(base + "data/specialties.json", {cache: "no-store"});
+  const candidatePaths = [
+    "assets/data/specialties.json",
+    "./assets/data/specialties.json",
+    window.location.origin + "/assets/data/specialties.json"
+  ];
+  let data = null;
+  for (const p of candidatePaths) {
+    try {
+      const resp = await fetch(p, { cache: "no-store" });
+      if (!resp.ok) {
+        console.warn("loadSpecialtiesFromJSON: tentativa falhou:", p, resp.status);
+        continue;
+      }
+      data = await resp.json();
+      console.log("✅ Especialidades carregadas de:", p);
+      break;
+    } catch (err) {
+      console.warn("loadSpecialtiesFromJSON: erro fetch em", p, err.message);
+    }
+  }
+
+  if (!data) {
+    console.error("❌ loadSpecialtiesFromJSON: NÃO foi possível carregar specialties.json. Verifique assets/data/specialties.json e o Live Server.");
+    return;
+  }
+
+  const espSel = document.getElementById("especialidade");
+  const subSel = document.getElementById("subespecialidade");
+  if (!espSel) { console.warn("loadSpecialtiesFromJSON: select #especialidade não encontrado"); return; }
+  if (!subSel) { console.warn("loadSpecialtiesFromJSON: select #subespecialidade não encontrado"); }
+
+  // popula especialidades
+  espSel.innerHTML = "<option value=''>Selecione</option>";
+  Object.keys(data).forEach(key => {
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = key;
+    espSel.appendChild(opt);
+  });
+
+  // handle change
+  espSel.addEventListener("change", () => {
+    const list = data[espSel.value] || [];
+    if (subSel) {
+      subSel.innerHTML = "<option value=''>Selecione</option>";
+      list.forEach(s => {
+        const op = document.createElement("option");
+        op.value = s; op.textContent = s;
+        subSel.appendChild(op);
+      });
+    }
+  });
+
+  // se quiser pré-selecionar a primeira especialidade (opcional)
+  // if (espSel.options.length > 1) espSel.selectedIndex = 0;
+}
+
+/* Garante invocação robusta */
+try {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      try { if (typeof loadSpecialtiesFromJSON === "function") loadSpecialtiesFromJSON(); } catch(e) { console.warn("Erro ao iniciar loadSpecialtiesFromJSON:", e); }
+    });
+  } else {
+    try { if (typeof loadSpecialtiesFromJSON === "function") loadSpecialtiesFromJSON(); } catch(e) { console.warn("Erro ao iniciar loadSpecialtiesFromJSON:", e); }
+  }
+} catch (err) { console.error("Patch loader: erro ao agendar carregamento", err); }
+/* --- fim Patch v0.5.3.1 --- */);
     if (!res.ok) throw new Error("Falha ao carregar specialties.json (" + res.status + ")");
     const data = await res.json();
     const espSel = document.getElementById("especialidade");
@@ -407,3 +540,4 @@ async function loadTermsContent() {
     content.innerHTML = "<p>⚠️ Erro ao carregar Termos: " + err.message + "</p>";
   }
 }
+
