@@ -387,3 +387,42 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+/* === v0.5.3.2 — Markdown Loader para Termos === */
+async function loadMarkdownIntoModal() {
+  const modal = document.getElementById("termsModal");
+  const container = modal?.querySelector(".terms-content");
+  if (!container) return;
+  try {
+    const res = await fetch("assets/terms/termos-uso-bioguard.md", { cache: "no-store" });
+    if (!res.ok) throw new Error("Falha ao carregar termos.");
+    const text = await res.text();
+    // Converter Markdown simples → HTML básico
+    const html = text
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+      .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+      .replace(/\*(.*)\*/gim, '<em>$1</em>')
+      .replace(/\n$/gim, '<br/>');
+    container.innerHTML = html;
+  } catch (err) {
+    container.innerHTML = "<p style='color:var(--accent)'>Erro ao carregar Termos: " + err.message + "</p>";
+    console.warn("loadMarkdownIntoModal:", err);
+  }
+}
+
+// Carregar o conteúdo ao abrir o modal
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".open-terms").forEach(el => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      const modal = document.getElementById("termsModal");
+      if (modal) {
+        modal.style.display = "flex";
+        loadMarkdownIntoModal();
+      }
+    });
+  });
+});
