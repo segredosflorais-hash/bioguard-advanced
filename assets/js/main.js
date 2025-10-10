@@ -518,3 +518,81 @@ function populateUFsSafe() {
     tryUFs();
   }
 })();
+
+/* === Patch v0.5.3.7 — Sequência de Inicialização Restaurada === */
+(function(){
+  function initDarkMode() {
+    const toggle = document.querySelector("#darkModeToggle");
+    if (!toggle) return;
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark") document.documentElement.classList.add("dark");
+    toggle.addEventListener("click", ()=>{
+      document.documentElement.classList.toggle("dark");
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    console.log("🌙 Dark mode restaurado");
+  }
+
+  function initUFs() {
+    const ufs = [
+      {code:'AC',name:'Acre'},{code:'AL',name:'Alagoas'},{code:'AP',name:'Amapá'},{code:'AM',name:'Amazonas'},
+      {code:'BA',name:'Bahia'},{code:'CE',name:'Ceará'},{code:'DF',name:'Distrito Federal'},{code:'ES',name:'Espírito Santo'},
+      {code:'GO',name:'Goiás'},{code:'MA',name:'Maranhão'},{code:'MT',name:'Mato Grosso'},{code:'MS',name:'Mato Grosso do Sul'},
+      {code:'MG',name:'Minas Gerais'},{code:'PA',name:'Pará'},{code:'PB',name:'Paraíba'},{code:'PR',name:'Paraná'},
+      {code:'PE',name:'Pernambuco'},{code:'PI',name:'Piauí'},{code:'RJ',name:'Rio de Janeiro'},{code:'RN',name:'Rio Grande do Norte'},
+      {code:'RS',name:'Rio Grande do Sul'},{code:'RO',name:'Rondônia'},{code:'RR',name:'Roraima'},{code:'SC',name:'Santa Catarina'},
+      {code:'SP',name:'São Paulo'},{code:'SE',name:'Sergipe'},{code:'TO',name:'Tocantins'}
+    ];
+    const sel = document.getElementById("uf");
+    if (!sel) return;
+    sel.innerHTML = '<option value="">Selecione</option>';
+    ufs.forEach(u=>{
+      const opt=document.createElement("option");
+      opt.value=u.code;
+      opt.textContent=`${u.code} — ${u.name}`;
+      sel.appendChild(opt);
+    });
+    console.log("✅ UFs do CRM carregadas:", ufs.length);
+  }
+
+  function initSpecialties() {
+    const base = "assets/data/specialties.json";
+    const espSel = document.getElementById("especialidade");
+    const subSel = document.getElementById("subespecialidade");
+    if (!espSel || !subSel) return;
+    fetch(base,{cache:"no-store"})
+      .then(res=>res.json())
+      .then(data=>{
+        espSel.innerHTML="<option value=''>Selecione</option>";
+        Object.keys(data).forEach(k=>{
+          const opt=document.createElement("option");
+          opt.value=k; opt.textContent=k;
+          espSel.appendChild(opt);
+        });
+        espSel.addEventListener("change",()=>{
+          const list=data[espSel.value]||[];
+          subSel.innerHTML="<option value=''>Selecione</option>";
+          list.forEach(s=>{
+            const o=document.createElement("option");
+            o.value=s; o.textContent=s;
+            subSel.appendChild(o);
+          });
+        });
+        console.log("✅ Especialidades carregadas com sucesso.");
+      })
+      .catch(e=>console.warn("⚠️ Erro ao carregar especialidades:",e.message));
+  }
+
+  function startAll() {
+    initDarkMode();
+    initUFs();
+    initSpecialties();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startAll);
+  } else {
+    startAll();
+  }
+})();
