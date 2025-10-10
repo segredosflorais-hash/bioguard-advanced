@@ -1,0 +1,163 @@
+/* ===================================================
+   BioGuard Sentinel — Neon Adaptive Core Styles
+   v0.5.1 (Zona Verde): theme, grid, modals, forms
+   =================================================== */
+
+/* Fonts */
+:root {
+  --bg: #eafff4;
+  --text: #013b2a;
+  --muted: #0f5b42;
+  --accent: #00c999;
+  --accent-dark: #00b37a;
+  --card-bg: rgba(255,255,255,0.9);
+  --footer-height: 56px;
+  --max-width: 1100px;
+}
+
+/* dark theme variables (applied to <html>.dark) */
+html.dark {
+  --bg: #011d15;
+  --text: #e7fff6;
+  --muted: #9bd7b9;
+  --accent: #00ffd6;
+  --accent-dark: #00c999;
+  --card-bg: rgba(255,255,255,0.04);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* header / brand */
+header {
+  padding: 1.6rem 1rem;
+  text-align: center;
+  position: relative;
+}
+.brand {
+  display: inline-block;
+  text-align: center;
+}
+.logo { width: 110px; display: block; margin: 0 auto 8px; filter: drop-shadow(0 0 6px var(--accent-dark)); }
+.brand-title { font-family: "Orbitron", sans-serif; font-size: 2.6rem; margin: 0; line-height: 1; }
+.slogan { font-family: "Orbitron", sans-serif; font-size: 1.15rem; margin: 6px 0 0; color: var(--muted); }
+
+/* theme toggle */
+.theme-toggle { position: absolute; top: 14px; right: 14px; background: transparent; border: none; cursor: pointer; color: var(--accent-dark); padding: 6px; border-radius: 8px; }
+.theme-toggle .theme-icon { display:block; }
+
+/* page grid layout */
+main { min-height: calc(100vh - var(--footer-height) - 120px); padding: 1.2rem; display:flex; justify-content:center; align-items:flex-start; }
+.page-grid { display: grid; gap: 2rem; width: 100%; max-width: var(--max-width); grid-template-columns: minmax(300px, 1fr) 260px; align-items:start; }
+
+/* features column */
+.features { padding: 0; margin: 0; }
+.feature-item { background: var(--card-bg); border-radius: 12px; padding: 1.2rem 1.4rem; margin-bottom: 1.1rem; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.feature-title { font-family: "Orbitron", sans-serif; font-weight:600; font-size:1.25rem; color: var(--accent); }
+.feature-text { font-family: "Inter", sans-serif; font-size: 1rem; color: var(--muted); line-height:1.4; margin: 0.4rem 0 0; }
+
+/* auth column */
+.auth-column { display:flex; align-items:center; justify-content:center; gap: 1rem; padding-top: 2rem; flex-direction: column; }
+.auth-link { display:inline-block; text-decoration:none; font-family: "Inter", sans-serif; font-weight:400; color: var(--text); background: rgba(255,255,255,0.03); padding: 0.65rem 1rem; border-radius: 10px; width:140px; text-align:center; border: 1px solid rgba(0,0,0,0.04); }
+html.dark .auth-link { color:#fff; background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+
+/* centered forms / modal */
+.centered-page { display:flex; align-items:center; justify-content:center; min-height: calc(100vh - var(--footer-height) - 120px); padding: 1.2rem; }
+.form-section, .card, .login-container { background: var(--card-bg); border-radius:12px; padding: 1.4rem; width: 100%; max-width: 560px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+/* labels & inputs */
+label { display:block; font-weight:500; color: var(--muted); margin-top: 0.8rem; margin-bottom: 0.3rem; }
+input[type="text"], input[type="email"], input[type="password"], select, textarea { width:100%; padding:0.7rem; border-radius:8px; border:1px solid rgba(0,0,0,0.07); background: rgba(255,255,255,0.95); color: var(--text); font-size:1rem; box-sizing:border-box; }
+html.dark input, html.dark select { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); color: var(--text); }
+
+/* password eye */
+.password-field { position:relative; display:flex; align-items:center; gap:8px; }
+.toggle-pass { background:transparent; border:none; cursor:pointer; padding:6px; }
+
+/* buttons */
+.btn-primary { display:inline-block; background: var(--accent); color:#013b2a; border:none; padding:0.8rem 1rem; border-radius:8px; cursor:pointer; font-weight:600; width:100%; margin-top:1rem; }
+.btn-primary:hover { background: var(--accent-dark); color:#fff; }
+
+/* modal */
+.modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 1.2rem; background: rgba(2,6,4,0.45); z-index: 80; }
+.modal[aria-hidden="false"] { display:flex; }
+.modal-content { background: var(--card-bg); border-radius:12px; padding: 1.4rem; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.35); position:relative; }
+.modal-close { position:absolute; top:10px; right:10px; background:transparent; border:none; font-size:20px; cursor:pointer; color:var(--muted); }
+
+/* footer fixed but not overlapping content (body padding-bottom ensures space) */
+footer { position: fixed; bottom:0; left:0; width:100%; height: var(--footer-height); display:flex; align-items:center; justify-content:center; background:transparent; z-index:70; color:var(--muted); font-size:0.9rem; }
+body { padding-bottom: calc(var(--footer-height) + 8px); }
+
+/* responsive */
+@media (max-width: 900px) {
+  .page-grid { grid-template-columns: 1fr; }
+  .auth-column { flex-direction: row; gap: 0.6rem; padding-top: 0.5rem; }
+  .brand-title { font-size: 2rem; }
+}
+
+/* accessibility visually-hidden */
+.visually-hidden { position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }
+
+/* --- Estilos adicionais: botão voltar e termos --- */
+.btn-voltar {
+  display: inline-block;
+  margin: 1rem 2rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+.btn-voltar:hover { color: var(--accent-dark); }
+
+.termos-container {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.termos-container a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+html.dark .termos-container a { color: var(--accent); }
+
+/* Modal de Termos */
+#modal-termos {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+}
+#modal-termos.active { display: flex; }
+.modal-content {
+  background: var(--card-bg);
+  color: var(--text);
+  width: 90%;
+  max-width: 700px;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+.modal-content button {
+  margin-top: 1rem;
+  background: var(--accent);
+  color: #013b2a;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

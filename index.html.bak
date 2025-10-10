@@ -6,7 +6,6 @@
   <title>BioGuard Sentinel — Minutos Salvam Vidas</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <header>
@@ -88,4 +87,3 @@
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
-
