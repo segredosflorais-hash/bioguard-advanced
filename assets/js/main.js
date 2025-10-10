@@ -477,3 +477,44 @@ function populateUFs() {
     document.addEventListener("DOMContentLoaded", diag);
   } else { diag(); }
 })();
+
+/* === Patch v0.5.3.6 — UF loader reliability fix === */
+function populateUFsSafe() {
+  const ufs = [
+    {code:'AC',name:'Acre'},{code:'AL',name:'Alagoas'},{code:'AP',name:'Amapá'},{code:'AM',name:'Amazonas'},
+    {code:'BA',name:'Bahia'},{code:'CE',name:'Ceará'},{code:'DF',name:'Distrito Federal'},{code:'ES',name:'Espírito Santo'},
+    {code:'GO',name:'Goiás'},{code:'MA',name:'Maranhão'},{code:'MT',name:'Mato Grosso'},{code:'MS',name:'Mato Grosso do Sul'},
+    {code:'MG',name:'Minas Gerais'},{code:'PA',name:'Pará'},{code:'PB',name:'Paraíba'},{code:'PR',name:'Paraná'},
+    {code:'PE',name:'Pernambuco'},{code:'PI',name:'Piauí'},{code:'RJ',name:'Rio de Janeiro'},{code:'RN',name:'Rio Grande do Norte'},
+    {code:'RS',name:'Rio Grande do Sul'},{code:'RO',name:'Rondônia'},{code:'RR',name:'Roraima'},{code:'SC',name:'Santa Catarina'},
+    {code:'SP',name:'São Paulo'},{code:'SE',name:'Sergipe'},{code:'TO',name:'Tocantins'}
+  ];
+  const sel = document.getElementById('uf');
+  if (!sel) {
+    console.warn("⚠️ select#uf não encontrado — aguardando DOM completo...");
+    return false;
+  }
+  sel.innerHTML = '<option value="">Selecione</option>';
+  ufs.forEach(u=>{
+    const opt=document.createElement('option');
+    opt.value=u.code;
+    opt.textContent=`${u.code} — ${u.name}`;
+    sel.appendChild(opt);
+  });
+  console.log("✅ UFs do CRM carregadas:", ufs.length);
+  return true;
+}
+
+// Tenta carregar UFs com verificação de DOM pronto
+(function(){
+  function tryUFs(){
+    if (!populateUFsSafe()){
+      setTimeout(tryUFs,500);
+    }
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', tryUFs);
+  } else {
+    tryUFs();
+  }
+})();
