@@ -465,3 +465,15 @@ function populateUFs() {
     populateUFs();
   }
 })();
+
+/* --- Diagnostics logger (v0.5.3.5) - logs presence of selects on DOMContentLoaded --- */
+(function(){
+  function diag() {
+    console.log("⚙️ Diagnostics: #especialidade =", !!document.getElementById("especialidade"));
+    console.log("⚙️ Diagnostics: #subespecialidade =", !!document.getElementById("subespecialidade"));
+    console.log("⚙️ Diagnostics: #uf =", !!document.getElementById("uf"));
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", diag);
+  } else { diag(); }
+})();
