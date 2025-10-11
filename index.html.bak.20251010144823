@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BioGuard Sentinel — Minutos Salvam Vidas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <header>
+    <button class="theme-toggle" id="themeToggle" title="Alternar tema" aria-label="Alternar tema">
+      <svg class="theme-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path id="themePath" fill="currentColor" d="M12 3a9 9 0 0 0 0 18c4.97 0 9-4.03 9-9a9 9 0 0 0-9-9z"/>
+      </svg>
+    </button>
+
+    <div class="brand">
+      <img src="assets/images/bioguard-logo.svg" alt="BioGuard Sentinel logo" class="logo" />
+      <h1 class="brand-title">BioGuard Sentinel</h1>
+      <p class="slogan">Minutos Salvam Vidas</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-grid">
+      <!-- Left: features - static informational blocks -->
+      <section class="features" aria-labelledby="featuresTitle">
+        <h2 id="featuresTitle" class="visually-hidden">Destaques</h2>
+
+        <article class="feature-item">
+          <div class="feature-title">Rapidez</div>
+          <p class="feature-text">Diagnóstico assistido em segundos — decisões clínicas aceleradas.</p>
+        </article>
+
+        <article class="feature-item">
+          <div class="feature-title">Foco</div>
+          <p class="feature-text">Interface objetiva para casos de sepse; zero ruído, máxima relevância.</p>
+        </article>
+
+        <article class="feature-item">
+          <div class="feature-title">Confiabilidade</div>
+          <p class="feature-text">Respostas contextualizadas por diretrizes, auditáveis e com disclaimer.</p>
+        </article>
+      </section>
+
+      <!-- Right: auth column with central links -->
+      <aside class="auth-column" aria-label="Ações de autenticação">
+        <a href="#" id="openLogin" class="auth-link">Login</a>
+        <a href="cadastro.html" class="auth-link">Cadastro</a>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Login Modal (in-page) -->
+  <div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle">
+    <div class="modal-content" role="document">
+      <button class="modal-close" id="closeLogin" aria-label="Fechar">×</button>
+      <h3 id="loginTitle" class="modal-title">Acesso Médico</h3>
+
+      <form id="loginForm" class="modal-form" autocomplete="off">
+        <label for="loginEmail">E-mail profissional</label>
+        <input id="loginEmail" name="email" type="email" placeholder="seu@hospital.org" required aria-required="true" />
+
+        <label for="loginPassword">Senha</label>
+        <div class="password-field">
+          <input id="loginPassword" name="password" type="password" placeholder="Digite sua senha" required aria-required="true" />
+          <!-- Eye icon SVG (vector, no emoji) -->
+          <button type="button" class="toggle-pass" aria-label="Mostrar senha" title="Mostrar senha">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zm0 2a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7z"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+          </button>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary">Entrar</button>
+          <a href="recovery.html" class="link-muted">Esqueci minha senha</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 BioGuard Sentinel — Open Source Clinical Intelligence - All Rights Reserved</p>
+  </footer>
+
+  <script src="assets/js/env.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
+

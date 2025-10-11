@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cadastro Médico | BioGuard Sentinel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+<script src="assets/js/env.js"></script>
+<script src="assets/js/main.js"></script>
+</head>
+<body>`n<a href="index.html" class="btn-voltar">← Voltar</a>
+  <header>
+    <div class="brand small">
+      <img src="assets/images/bioguard-logo.svg" alt="logo" class="logo small" />
+      <h1 class="brand-title small">BioGuard Sentinel</h1>
+    </div>
+  </header>
+
+  <main class="centered-page">
+    <section class="card register-card">
+      <h2>Cadastro Médico</h2>
+
+      <form id="registerForm" class="register-form" autocomplete="off" novalidate>
+        <label for="fullname">Nome completo</label>
+        <input id="fullname" name="fullname" type="text" placeholder="Nome completo" required />
+
+        <div class="row-split">
+          <div>
+            <label for="crm">CRM</label>
+            <input id="crm" name="crm" type="text" placeholder="CRM - ex: CRM-SP 12345" required />
+          </div>
+          <div>
+            <label for="uf">UF do CRM</label>
+            <select id="uf" name="uf" required>
+              <option value="">Selecione</option>
+              <option>SP</option><option>RJ</option><option>MG</option><option>RS</option><option>PR</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="email">E-mail profissional</label>
+        <input id="email" name="email" type="email" placeholder="seu@hospital.org" required />
+
+        <div class="row-split">
+          <div>
+            <label for="password">Senha</label>
+            <div class="password-field login-card">
+              <input id="password" name="password" type="password" placeholder="Crie uma senha" required />
+              <button type="button" class="toggle-pass" aria-label="Mostrar senha">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zm0 2a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7z"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label for="confirm">Confirmar senha</label>
+            <div class="password-field login-card">
+              <input id="confirm" name="confirm" type="password" placeholder="Repita a senha" required />
+              <button type="button" class="toggle-pass" aria-label="Mostrar confirmação">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 5c5 0 9 4 9 7s-4 7-9 7-9-4-9-7 4-7 9-7zm0 2a5 5 0 1 0 .001 10.001A5 5 0 0 0 12 7z"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <label for="especialidade">Especialidade</label>
+        <select id="especialidade" name="especialidade" required>
+          <option value="">Selecione</option>
+        </select>
+
+        <label for="subespecialidade">Subespecialidade</label>
+        <select id="subespecialidade" name="subespecialidade" required>
+          <option value="">Selecione uma especialidade primeiro</option>
+        </select>
+
+        <div class="assinatura-digital">
+          <button type="button" id="sougov-validate" class="btn-secundary">Validar com Sou.Gov</button>
+          <small id="sougov-status" class="sougov-status">Não validado</small>
+        </div>
+
+        <div class="disclaimer">
+          <label class="check">
+            <input type="checkbox" id="aceite-termos" required />
+            Confirmo a veracidade das informações e concordo com os termos.
+          </label>
+<p><a href='#' class='open-terms' style='font-family:Inter, sans-serif;font-size:0.95rem;'>Ler Termos e Condições</a></p>
+        </div>
+
+        <div class="actions">
+          <div class="termos-container">
+  <label>
+    <input type="checkbox" id="termos-condicoes" required>
+    Li e concordo com os <a href="#" id="ver-termos">Termos e Condições de Uso</a>.
+  </label>
+</div>
+Cadastrar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 BioGuard Sentinel — Open Source Clinical Intelligence - All Rights Reserved</p>
+  </footer>
+
+  <script src="assets/js/env.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+<!-- Termos Modal -->
+<div id="termsModal" class="modal" style="display:none;">
+  <div class="modal-inner">
+    <h3>Termos e Condições de Uso</h3>
+    <div class="terms-content" style="max-height:360px;overflow:auto;padding:0.5rem 1rem;background:var(--card-bg);border-radius:8px">
+      <!-- O conteúdo completo pode ser carregado de assets/terms/termos-uso-bioguard.md convertendo para HTML -->
+      <p><strong>Leia com atenção:</strong> Ao aceitar, você confirma a veracidade dos dados e concorda com a política de uso do BioGuard Sentinel.</p>
+      <p>... (substitua pelo documento oficial em assets/terms/)</p>
+    </div>
+    <div style="margin-top:1rem;text-align:right">
+      <button id="termsClose" class="btn-secundary">Fechar</button>
+      <button id="termsAccept" class="btn-primary">Aceito os Termos</button>
+    </div>
+  </div>
+</div>
+<style>
+/* modal básico, estilize em style.css conforme necessidade */
+.modal { position: fixed; left:0;top:0;right:0;bottom:0; display:flex; align-items:center; justify-content:center; z-index:9999; background: rgba(0,0,0,0.45); }
+.modal-inner { background: var(--bg); color: var(--text); padding: 1.2rem; border-radius: 10px; width: min(740px, 96%); box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+</style>
+</body>
+</html>
+
+
+
+
